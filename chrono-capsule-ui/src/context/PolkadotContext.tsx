@@ -5,7 +5,7 @@ import { InjectedAccountWithMeta } from '@polkadot/extension-inject/types';
 import { ContractPromise } from '@polkadot/api-contract';
 import metadata from '../metadata.json'; // 
 
-const CONTRACT_ADDRESS = "DEPLOYED_CONTRACT_ADDRESS"; 
+const CONTRACT_ADDRESS = "16TXfhJWJ1QyH86eHJMUK8NTv64P5Z5ymStYB2kYNXWQuA3t"; 
 const RPC_ENDPOINT = "wss://rpc1.paseo.popnetwork.xyz"; 
 
 interface PolkadotContextState {

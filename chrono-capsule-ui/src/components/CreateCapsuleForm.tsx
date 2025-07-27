@@ -4,6 +4,7 @@ import { usePolkadot } from '../context/PolkadotContext';
 import { web3FromSource } from '@polkadot/extension-dapp';
 import { motion } from 'framer-motion';
 import { BN, BN_ZERO } from '@polkadot/util';
+import { WeightV2 } from '@polkadot/types/interfaces';
 
 type FormData = {
   recipient: string;
@@ -12,6 +13,25 @@ type FormData = {
   value: string;
 };
 
+const parseToSmallestUnit = (value: string, decimals: number): BN => {
+  if (!value) {
+    return BN_ZERO;
+  }
+
+  // Sanitize the input
+  const cleanValue = value.trim();
+  if (cleanValue === '' || isNaN(Number(cleanValue))) {
+    return BN_ZERO;
+  }
+
+  const [whole, fraction = ''] = cleanValue.split('.');
+  
+  // Pad the fractional part to the full decimal length
+  const paddedFraction = fraction.padEnd(decimals, '0').slice(0, decimals);
+  
+  const combined = whole + paddedFraction;
+  return new BN(combined);
+};
 const CreateCapsuleForm = ({ onCapsuleCreated }: { onCapsuleCreated: () => void }) => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>();
   const { api, contract, selectedAccount } = usePolkadot();
@@ -25,10 +45,15 @@ const CreateCapsuleForm = ({ onCapsuleCreated }: { onCapsuleCreated: () => void 
 
     try {
       const injector = await web3FromSource(selectedAccount.meta.source);
-      const valueInSmallestUnit = new BN(data.value || '0').mul(new BN(10 ** api.registry.chainDecimals[0]));
-
+   //   const valueInSmallestUnit = new BN(data.value || '0').mul(new BN(10 ** api.registry.chainDecimals[0]));
+   const valueInSmallestUnit = parseToSmallestUnit(data.value, api.registry.chainDecimals[0]);
+   setStatus('Estimating gas...');
+   const gasLimit = api.registry.createType('WeightV2', {
+    refTime: "5000000000",   // 5 Giga-RefTime (a large amount of computation time)
+    proofSize: "524288"     // 512 Kilo-bytes (a large amount of storage proof size)
+}) as WeightV2;
       const tx = contract.tx.createCapsule(
-        { value: valueInSmallestUnit, gasLimit: -1 },
+        { value: valueInSmallestUnit, gasLimit:  gasLimit },
         data.recipient,
         data.message,
         data.duration

@@ -3,7 +3,7 @@ import { usePolkadot } from '../context/PolkadotContext';
 import { motion } from 'framer-motion';
 
 const ConnectWallet = () => {
-  const { connect, accounts, selectedAccount, setSelectedAccount } = usePolkadot();
+  const { connect, accounts, selectedAccount, setSelectedAccount, balance } = usePolkadot();
   if (!selectedAccount) {
     return (
       <motion.button
@@ -36,6 +36,9 @@ const ConnectWallet = () => {
           </option>
         ))}
       </select>
+      <div className="text-sm text-pink-400 font-semibold pr-2">
+        {balance}
+      </div>
     </div>
   );
 };

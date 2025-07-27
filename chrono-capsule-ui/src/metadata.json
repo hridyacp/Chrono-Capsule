@@ -1,4 +1,945 @@
-{ "metadata":{
-
-}
-}
+{
+    "source": {
+      "hash": "0x8c5489aed58994a572ca5b15e84ed7d5f3b276211e71b422fc3148ea1a3f1d79",
+      "language": "ink! 5.1.1",
+      "compiler": "rustc 1.88.0",
+      "build_info": {
+        "build_mode": "Release",
+        "cargo_contract_version": "3.2.0",
+        "rust_toolchain": "stable-aarch64-apple-darwin",
+        "wasm_opt_settings": {
+          "keep_debug_symbols": false,
+          "optimization_passes": "Z"
+        }
+      }
+    },
+    "contract": {
+      "name": "chrono_contract",
+      "version": "0.1.0",
+      "authors": [
+        "[your_name] <[your_email]>"
+      ]
+    },
+    "spec": {
+      "constructors": [
+        {
+          "args": [],
+          "default": false,
+          "docs": [],
+          "label": "new",
+          "payable": false,
+          "returnType": {
+            "displayName": [
+              "ink_primitives",
+              "ConstructorResult"
+            ],
+            "type": 14
+          },
+          "selector": "0x9bae9d5e"
+        }
+      ],
+      "docs": [],
+      "environment": {
+        "accountId": {
+          "displayName": [
+            "AccountId"
+          ],
+          "type": 0
+        },
+        "balance": {
+          "displayName": [
+            "Balance"
+          ],
+          "type": 5
+        },
+        "blockNumber": {
+          "displayName": [
+            "BlockNumber"
+          ],
+          "type": 4
+        },
+        "chainExtension": {
+          "displayName": [
+            "ChainExtension"
+          ],
+          "type": 23
+        },
+        "hash": {
+          "displayName": [
+            "Hash"
+          ],
+          "type": 22
+        },
+        "maxEventTopics": 4,
+        "staticBufferSize": 16384,
+        "timestamp": {
+          "displayName": [
+            "Timestamp"
+          ],
+          "type": 7
+        }
+      },
+      "events": [
+        {
+          "args": [
+            {
+              "docs": [],
+              "indexed": true,
+              "label": "id",
+              "type": {
+                "displayName": [
+                  "CapsuleId"
+                ],
+                "type": 7
+              }
+            },
+            {
+              "docs": [],
+              "indexed": true,
+              "label": "from",
+              "type": {
+                "displayName": [
+                  "AccountId"
+                ],
+                "type": 0
+              }
+            },
+            {
+              "docs": [],
+              "indexed": true,
+              "label": "to",
+              "type": {
+                "displayName": [
+                  "AccountId"
+                ],
+                "type": 0
+              }
+            },
+            {
+              "docs": [],
+              "indexed": false,
+              "label": "unlock_block",
+              "type": {
+                "displayName": [
+                  "BlockNumber"
+                ],
+                "type": 4
+              }
+            }
+          ],
+          "docs": [],
+          "label": "CapsuleCreated",
+          "module_path": "chrono_contract::chrono_contract",
+          "signature_topic": "0xb801ac348d1c99757bec25d8bdfa179f3251e0b66fe5e5e9fb99975babf52840"
+        },
+        {
+          "args": [
+            {
+              "docs": [],
+              "indexed": true,
+              "label": "id",
+              "type": {
+                "displayName": [
+                  "CapsuleId"
+                ],
+                "type": 7
+              }
+            },
+            {
+              "docs": [],
+              "indexed": true,
+              "label": "by",
+              "type": {
+                "displayName": [
+                  "AccountId"
+                ],
+                "type": 0
+              }
+            }
+          ],
+          "docs": [],
+          "label": "CapsuleOpened",
+          "module_path": "chrono_contract::chrono_contract",
+          "signature_topic": "0xb4890a3c5ed475d424c52415ff450fd1a418c8612c3000ec01124a59f5f3ef80"
+        }
+      ],
+      "lang_error": {
+        "displayName": [
+          "ink",
+          "LangError"
+        ],
+        "type": 15
+      },
+      "messages": [
+        {
+          "args": [
+            {
+              "label": "recipient",
+              "type": {
+                "displayName": [
+                  "AccountId"
+                ],
+                "type": 0
+              }
+            },
+            {
+              "label": "message",
+              "type": {
+                "displayName": [
+                  "Vec"
+                ],
+                "type": 3
+              }
+            },
+            {
+              "label": "unlock_duration_in_blocks",
+              "type": {
+                "displayName": [
+                  "BlockNumber"
+                ],
+                "type": 4
+              }
+            }
+          ],
+          "default": false,
+          "docs": [
+            " Creates a new time capsule."
+          ],
+          "label": "create_capsule",
+          "mutates": true,
+          "payable": true,
+          "returnType": {
+            "displayName": [
+              "ink",
+              "MessageResult"
+            ],
+            "type": 16
+          },
+          "selector": "0xb99df5d1"
+        },
+        {
+          "args": [
+            {
+              "label": "id",
+              "type": {
+                "displayName": [
+                  "CapsuleId"
+                ],
+                "type": 7
+              }
+            }
+          ],
+          "default": false,
+          "docs": [],
+          "label": "open_capsule",
+          "mutates": true,
+          "payable": false,
+          "returnType": {
+            "displayName": [
+              "ink",
+              "MessageResult"
+            ],
+            "type": 16
+          },
+          "selector": "0xb1f6a184"
+        },
+        {
+          "args": [
+            {
+              "label": "id",
+              "type": {
+                "displayName": [
+                  "CapsuleId"
+                ],
+                "type": 7
+              }
+            }
+          ],
+          "default": false,
+          "docs": [],
+          "label": "get_capsule",
+          "mutates": false,
+          "payable": false,
+          "returnType": {
+            "displayName": [
+              "ink",
+              "MessageResult"
+            ],
+            "type": 19
+          },
+          "selector": "0xfd2fb8f6"
+        },
+        {
+          "args": [],
+          "default": false,
+          "docs": [
+            " Returns the total number of capsules ever created."
+          ],
+          "label": "get_total_capsules",
+          "mutates": false,
+          "payable": false,
+          "returnType": {
+            "displayName": [
+              "ink",
+              "MessageResult"
+            ],
+            "type": 21
+          },
+          "selector": "0x45e27fbb"
+        }
+      ]
+    },
+    "storage": {
+      "root": {
+        "layout": {
+          "struct": {
+            "fields": [
+              {
+                "layout": {
+                  "root": {
+                    "layout": {
+                      "struct": {
+                        "fields": [
+                          {
+                            "layout": {
+                              "leaf": {
+                                "key": "0xb8ac755e",
+                                "ty": 0
+                              }
+                            },
+                            "name": "creator"
+                          },
+                          {
+                            "layout": {
+                              "leaf": {
+                                "key": "0xb8ac755e",
+                                "ty": 0
+                              }
+                            },
+                            "name": "recipient"
+                          },
+                          {
+                            "layout": {
+                              "leaf": {
+                                "key": "0xb8ac755e",
+                                "ty": 3
+                              }
+                            },
+                            "name": "message"
+                          },
+                          {
+                            "layout": {
+                              "leaf": {
+                                "key": "0xb8ac755e",
+                                "ty": 4
+                              }
+                            },
+                            "name": "unlock_block"
+                          },
+                          {
+                            "layout": {
+                              "leaf": {
+                                "key": "0xb8ac755e",
+                                "ty": 5
+                              }
+                            },
+                            "name": "value_locked"
+                          }
+                        ],
+                        "name": "Capsule"
+                      }
+                    },
+                    "root_key": "0xb8ac755e",
+                    "ty": 6
+                  }
+                },
+                "name": "capsules"
+              },
+              {
+                "layout": {
+                  "leaf": {
+                    "key": "0x00000000",
+                    "ty": 7
+                  }
+                },
+                "name": "next_capsule_id"
+              }
+            ],
+            "name": "ChronoCapsule"
+          }
+        },
+        "root_key": "0x00000000",
+        "ty": 13
+      }
+    },
+    "types": [
+      {
+        "id": 0,
+        "type": {
+          "def": {
+            "composite": {
+              "fields": [
+                {
+                  "type": 1,
+                  "typeName": "[u8; 32]"
+                }
+              ]
+            }
+          },
+          "path": [
+            "ink_primitives",
+            "types",
+            "AccountId"
+          ]
+        }
+      },
+      {
+        "id": 1,
+        "type": {
+          "def": {
+            "array": {
+              "len": 32,
+              "type": 2
+            }
+          }
+        }
+      },
+      {
+        "id": 2,
+        "type": {
+          "def": {
+            "primitive": "u8"
+          }
+        }
+      },
+      {
+        "id": 3,
+        "type": {
+          "def": {
+            "sequence": {
+              "type": 2
+            }
+          }
+        }
+      },
+      {
+        "id": 4,
+        "type": {
+          "def": {
+            "primitive": "u32"
+          }
+        }
+      },
+      {
+        "id": 5,
+        "type": {
+          "def": {
+            "primitive": "u128"
+          }
+        }
+      },
+      {
+        "id": 6,
+        "type": {
+          "def": {
+            "composite": {}
+          },
+          "params": [
+            {
+              "name": "K",
+              "type": 7
+            },
+            {
+              "name": "V",
+              "type": 8
+            },
+            {
+              "name": "KeyType",
+              "type": 9
+            }
+          ],
+          "path": [
+            "ink_storage",
+            "lazy",
+            "mapping",
+            "Mapping"
+          ]
+        }
+      },
+      {
+        "id": 7,
+        "type": {
+          "def": {
+            "primitive": "u64"
+          }
+        }
+      },
+      {
+        "id": 8,
+        "type": {
+          "def": {
+            "composite": {
+              "fields": [
+                {
+                  "name": "creator",
+                  "type": 0,
+                  "typeName": "AccountId"
+                },
+                {
+                  "name": "recipient",
+                  "type": 0,
+                  "typeName": "AccountId"
+                },
+                {
+                  "name": "message",
+                  "type": 3,
+                  "typeName": "Vec<u8>"
+                },
+                {
+                  "name": "unlock_block",
+                  "type": 4,
+                  "typeName": "BlockNumber"
+                },
+                {
+                  "name": "value_locked",
+                  "type": 5,
+                  "typeName": "Balance"
+                }
+              ]
+            }
+          },
+          "path": [
+            "chrono_contract",
+            "chrono_contract",
+            "Capsule"
+          ]
+        }
+      },
+      {
+        "id": 9,
+        "type": {
+          "def": {
+            "composite": {}
+          },
+          "params": [
+            {
+              "name": "L",
+              "type": 10
+            },
+            {
+              "name": "R",
+              "type": 11
+            }
+          ],
+          "path": [
+            "ink_storage_traits",
+            "impls",
+            "ResolverKey"
+          ]
+        }
+      },
+      {
+        "id": 10,
+        "type": {
+          "def": {
+            "composite": {}
+          },
+          "path": [
+            "ink_storage_traits",
+            "impls",
+            "AutoKey"
+          ]
+        }
+      },
+      {
+        "id": 11,
+        "type": {
+          "def": {
+            "composite": {}
+          },
+          "params": [
+            {
+              "name": "ParentKey",
+              "type": 12
+            }
+          ],
+          "path": [
+            "ink_storage_traits",
+            "impls",
+            "ManualKey"
+          ]
+        }
+      },
+      {
+        "id": 12,
+        "type": {
+          "def": {
+            "tuple": []
+          }
+        }
+      },
+      {
+        "id": 13,
+        "type": {
+          "def": {
+            "composite": {
+              "fields": [
+                {
+                  "name": "capsules",
+                  "type": 6,
+                  "typeName": "<Mapping<CapsuleId, Capsule> as::ink::storage::traits::\nAutoStorableHint<::ink::storage::traits::ManualKey<1584770232u32,\n()>,>>::Type"
+                },
+                {
+                  "name": "next_capsule_id",
+                  "type": 7,
+                  "typeName": "<CapsuleId as::ink::storage::traits::AutoStorableHint<::ink::\nstorage::traits::ManualKey<2286930445u32, ()>,>>::Type"
+                }
+              ]
+            }
+          },
+          "path": [
+            "chrono_contract",
+            "chrono_contract",
+            "ChronoCapsule"
+          ]
+        }
+      },
+      {
+        "id": 14,
+        "type": {
+          "def": {
+            "variant": {
+              "variants": [
+                {
+                  "fields": [
+                    {
+                      "type": 12
+                    }
+                  ],
+                  "index": 0,
+                  "name": "Ok"
+                },
+                {
+                  "fields": [
+                    {
+                      "type": 15
+                    }
+                  ],
+                  "index": 1,
+                  "name": "Err"
+                }
+              ]
+            }
+          },
+          "params": [
+            {
+              "name": "T",
+              "type": 12
+            },
+            {
+              "name": "E",
+              "type": 15
+            }
+          ],
+          "path": [
+            "Result"
+          ]
+        }
+      },
+      {
+        "id": 15,
+        "type": {
+          "def": {
+            "variant": {
+              "variants": [
+                {
+                  "index": 1,
+                  "name": "CouldNotReadInput"
+                }
+              ]
+            }
+          },
+          "path": [
+            "ink_primitives",
+            "LangError"
+          ]
+        }
+      },
+      {
+        "id": 16,
+        "type": {
+          "def": {
+            "variant": {
+              "variants": [
+                {
+                  "fields": [
+                    {
+                      "type": 17
+                    }
+                  ],
+                  "index": 0,
+                  "name": "Ok"
+                },
+                {
+                  "fields": [
+                    {
+                      "type": 15
+                    }
+                  ],
+                  "index": 1,
+                  "name": "Err"
+                }
+              ]
+            }
+          },
+          "params": [
+            {
+              "name": "T",
+              "type": 17
+            },
+            {
+              "name": "E",
+              "type": 15
+            }
+          ],
+          "path": [
+            "Result"
+          ]
+        }
+      },
+      {
+        "id": 17,
+        "type": {
+          "def": {
+            "variant": {
+              "variants": [
+                {
+                  "fields": [
+                    {
+                      "type": 12
+                    }
+                  ],
+                  "index": 0,
+                  "name": "Ok"
+                },
+                {
+                  "fields": [
+                    {
+                      "type": 18
+                    }
+                  ],
+                  "index": 1,
+                  "name": "Err"
+                }
+              ]
+            }
+          },
+          "params": [
+            {
+              "name": "T",
+              "type": 12
+            },
+            {
+              "name": "E",
+              "type": 18
+            }
+          ],
+          "path": [
+            "Result"
+          ]
+        }
+      },
+      {
+        "id": 18,
+        "type": {
+          "def": {
+            "variant": {
+              "variants": [
+                {
+                  "index": 0,
+                  "name": "UnlockTimeMustBeInFuture"
+                },
+                {
+                  "index": 1,
+                  "name": "CapsuleNotFound"
+                },
+                {
+                  "index": 2,
+                  "name": "CapsuleIsStillLocked"
+                },
+                {
+                  "index": 3,
+                  "name": "NotTheDesignatedRecipient"
+                },
+                {
+                  "index": 4,
+                  "name": "TokenTransferFailed"
+                },
+                {
+                  "index": 5,
+                  "name": "AdditionOverflow"
+                }
+              ]
+            }
+          },
+          "path": [
+            "chrono_contract",
+            "chrono_contract",
+            "Error"
+          ]
+        }
+      },
+      {
+        "id": 19,
+        "type": {
+          "def": {
+            "variant": {
+              "variants": [
+                {
+                  "fields": [
+                    {
+                      "type": 20
+                    }
+                  ],
+                  "index": 0,
+                  "name": "Ok"
+                },
+                {
+                  "fields": [
+                    {
+                      "type": 15
+                    }
+                  ],
+                  "index": 1,
+                  "name": "Err"
+                }
+              ]
+            }
+          },
+          "params": [
+            {
+              "name": "T",
+              "type": 20
+            },
+            {
+              "name": "E",
+              "type": 15
+            }
+          ],
+          "path": [
+            "Result"
+          ]
+        }
+      },
+      {
+        "id": 20,
+        "type": {
+          "def": {
+            "variant": {
+              "variants": [
+                {
+                  "index": 0,
+                  "name": "None"
+                },
+                {
+                  "fields": [
+                    {
+                      "type": 8
+                    }
+                  ],
+                  "index": 1,
+                  "name": "Some"
+                }
+              ]
+            }
+          },
+          "params": [
+            {
+              "name": "T",
+              "type": 8
+            }
+          ],
+          "path": [
+            "Option"
+          ]
+        }
+      },
+      {
+        "id": 21,
+        "type": {
+          "def": {
+            "variant": {
+              "variants": [
+                {
+                  "fields": [
+                    {
+                      "type": 7
+                    }
+                  ],
+                  "index": 0,
+                  "name": "Ok"
+                },
+                {
+                  "fields": [
+                    {
+                      "type": 15
+                    }
+                  ],
+                  "index": 1,
+                  "name": "Err"
+                }
+              ]
+            }
+          },
+          "params": [
+            {
+              "name": "T",
+              "type": 7
+            },
+            {
+              "name": "E",
+              "type": 15
+            }
+          ],
+          "path": [
+            "Result"
+          ]
+        }
+      },
+      {
+        "id": 22,
+        "type": {
+          "def": {
+            "composite": {
+              "fields": [
+                {
+                  "type": 1,
+                  "typeName": "[u8; 32]"
+                }
+              ]
+            }
+          },
+          "path": [
+            "ink_primitives",
+            "types",
+            "Hash"
+          ]
+        }
+      },
+      {
+        "id": 23,
+        "type": {
+          "def": {
+            "variant": {}
+          },
+          "path": [
+            "ink_env",
+            "types",
+            "NoChainExtension"
+          ]
+        }
+      }
+    ],
+    "version": 5
+  }
+  
